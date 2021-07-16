@@ -1,5 +1,7 @@
 # TEST NEXT.js Issue
 
+https://nextjs.org/learn/basics/assets-metadata-css/global-styles
+
 ### Issue List
 
 1. a태그와 Link태그 (새로고침 방지 )
