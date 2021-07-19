@@ -10,6 +10,14 @@ https://nextjs.org/learn/basics/assets-metadata-css/global-styles
 4. styled-jsx ( "CSS-in-JS" 라이브러리 )
 5. sass
 6. Layout 구성 ( /components/layout/layout )
+7. classnames 라이브러리 ( className 경우에 따라 변경 )
+8. getStaticProps (SSR 핵심, nextjs v9.3 이후엔 사용 권장하지 않음)
+9. gray-matter ( README.md 내부 내용을 json으로 가져와 화면에 출력 )
+10. 동적경로 (파일 이름에 따른 경로생성)
+11. remark 라이브러리 (렌더 마크다운, 파일내부 컨텐츠 화면에 출력)
+12. 날짜형식지정
+13. error 404 page 생성
+14. API 요청
 
 ### Link태그와 a태그
 
@@ -116,3 +124,89 @@ import Layout from '../../components/layout'
     ...
 </Layout>
 ```
+
+### classnames 라이브러리 ( className 경우에 따라 변경 )
+
+```
+// 설치
+yarn add classnames
+
+// 사용
+import cn from 'classnames'
+
+return (
+  <div
+    className={cn({
+      [styles.success]: type === 'success',
+      [styles.error]: type === 'error'
+    })}
+  >
+    {children}
+  </div>
+)
+```
+
+### getStaticProps (SSR 핵심)
+
+참고 : https://nextjs.org/docs/basic-features/data-fetching#getstaticprops-static-generation
+
+- 이 안에서 axios등으로 미리 호출하면 빌드전에 데이터 호출 가능하다.
+
+### 동적경로 (파일이름에 따른 경로 생성)
+
+1. 폴더 내의 모든 filename을 가져옴 ( /lib/posts => postsDirectory )
+2. 파일의 확장자명을 빼고, 경로로 사용할 이름을 배열에 저장 ( /lib/posts => getAllPostIds )
+3. /pages/posts/[id].js 에서 getStaticProps에 postData 저장
+4. 같은 파일 내 Post 컴포넌트에서 가져온 postData 출력
+
+- 확인용 링크
+  http://localhost:3000/posts/ssg-ssr
+  http://localhost:3000/posts/pre-rendering
+
+그 외 동적경로 세부정보 확인 : https://nextjs.org/learn/basics/dynamic-routes/dynamic-routes-details
+
+### remark 라이브러리 (렌더 마크다운, 파일내부 컨텐츠 화면에 출력)
+
+```
+npm install remark remark-html
+```
+
+getPostData, getStaticProps, Post 업데이트
+
+### 날짜형식지정
+
+```
+// 설치
+npm install date-fns
+
+// 사용
+import { parseISO, format } from 'date-fns'
+export default function Date({ dateString }) {
+  const date = parseISO(dateString)
+  return <time dateTime={dateString}>{format(date, 'LLLL d, yyyy')}</time>
+}
+
+<Date dateString={date} />
+```
+
+### error 404 page 생성
+
+pages/404/js
+
+### API 요청
+
+[1] 경로 생성
+/pages/api/hello.js 확인
+
+req 문서 : https://nodejs.org/api/http.html#http_class_http_incomingmessage
+res 문서 : https://nodejs.org/api/http.html#http_class_http_serverresponse
+
+[2] getStaticProps에서 API 조회하기
+
+- 브라우저가 아닌 Node 상에서 API 를 조회해야 하기 때문에, fetch 는 쓸수 없고, node-fetch 를 써야한다.
+
+```
+import fetch from ‘node-fetch’;
+```
+
+참고 : https://pks2974.medium.com/nextjs-%EB%A1%9C-static-site-%EB%A7%8C%EB%93%A4%EA%B8%B0-f9ab83f29e7

@@ -1,52 +1,51 @@
-import Head from 'next/head'
-import styles from '../styles/Home.module.css'
-import Layout from '../components/layout'
+import Layout from '../components/layout/layout'
+import utilStyles from '../styles/utils.module.css'
+
+import { getSortedPostsData } from '../lib/posts'
 import Link from 'next/link'
-import Image from 'next/image'
+import Date from '../components/date/date'
 
-const ImageComponent = () => (
-  <Image
-    src="/images/test.png" // Route of the image file
-    height={144} // Desired size with correct aspect ratio
-    width={144} // Desired size with correct aspect ratio
-    alt="Your Name"
-  />
-)
+export async function getStaticProps() {
+  const allPostsData = getSortedPostsData()
+  return {
+    props: {
+      allPostsData
+    }
+  }
+}
 
-
-export default function Home() {
+export default function Home({ allPostsData }) {
   return (
-    <div className={styles.container}>
-      <Layout>
-      <Head>
-        <title>DH NextJS</title>
-        <link rel="icon" href="/favicon.ico" />
-      </Head>
+    <Layout home>
 
-      <Link href="/intro/intro">
-        <a className="Link_intro">go to intro page</a>
-      </Link>
+      {/* <section className={utilStyles.headingMd}>
+        <p>hello, nextjs world</p>
+        <p>
+          
+        </p>
+      </section> */}
 
-      <ImageComponent />
+      <section className={`${utilStyles.headingMd} ${utilStyles.padding1px}`}>
+        <h2 className={utilStyles.headingLg}>Blog</h2>
+        
+        <ul className={utilStyles.list}>
+          {allPostsData.map(({ id, date, title }) => (
+            <li className={utilStyles.listItem} key={id}>
+              <Link href={`/posts/${id}`}>
+                <a>{title}</a>
+              </Link>
+              <br />
+              <small className={utilStyles.lightText}>
+                <Date dateString={date} />
+              </small>
+            </li>
+          ))}
+        </ul>
 
-
-      <footer className={styles.footer}>
-        <a
-          href="https://vercel.com?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Powered by{' '}
-          <img src="/vercel.svg" alt="Vercel Logo" className={styles.logo} />
-        </a>
-      </footer>
-
-      <style jsx>{`
-        .Link_intro {
-          font-size:30px;
-        }
-      `}</style>
+        <Link href="/intro/intro">
+          <a>go to intro page</a>
+        </Link>
+      </section>
     </Layout>
-  </div>
   )
 }
