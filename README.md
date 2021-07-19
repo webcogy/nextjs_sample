@@ -1,6 +1,8 @@
 # TEST NEXT.js Issue
 
-https://nextjs.org/learn/basics/assets-metadata-css/global-styles
+튜토리얼 참고 : https://nextjs.org/learn/basics/assets-metadata-css/global-styles
+
+배포완료 주소 : https://nextjs-sample-sigma-pink.vercel.app/
 
 ### Issue List
 
@@ -18,6 +20,8 @@ https://nextjs.org/learn/basics/assets-metadata-css/global-styles
 12. 날짜형식지정
 13. error 404 page 생성
 14. API 요청
+15. 배포
+16. 타입스크립트로 변경
 
 ### Link태그와 a태그
 
@@ -210,3 +214,33 @@ import fetch from ‘node-fetch’;
 ```
 
 참고 : https://pks2974.medium.com/nextjs-%EB%A1%9C-static-site-%EB%A7%8C%EB%93%A4%EA%B8%B0-f9ab83f29e7
+
+### 배포
+
+[1] git repository 배포
+
+1. Vercel 계정 : https://vercel.com/signup
+2. git repository 자동검색 됨, 배포할 프로젝트 import
+3. 내용 작성 후 deploy버튼 클릭 => bulid => 배포완료 (visit버튼을 통해 확인)
+
+[2] 기타 호스팅 옵션 배포방법 (그냥 기본인 build 폴더를 만들어서 해당 호스팅 위치에 넣는 방법임)
+
+package.json
+
+```json
+{
+  "scripts": {
+    "dev": "next",
+    "build": "next build",
+    "start": "next start"
+  }
+}
+
+1. npm run build
+2. npm run start
+3. build폴더 호스팅 폴더에 넣기
+```
+
+### 타입스크립트로 변경
+
+참고 : https://nextjs.org/learn/excel/typescript/create-tsconfig
