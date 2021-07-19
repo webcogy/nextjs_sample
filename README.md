@@ -23,7 +23,7 @@
 15. 배포
 16. 타입스크립트로 변경
 
-### Link태그와 a태그
+## 1. Link태그와 a태그
 
 - a => 새로고침.
 - Link => 새로고침되지 않음.
@@ -39,7 +39,7 @@ import Link from 'next/link'
 
 ---
 
-### img태그와 Image태그
+## 2. img태그와 Image태그
 
 - img => 최적화 안됨
 - Image => 최적화됨 (이미지 크기 조정 및 최적화)
@@ -62,7 +62,7 @@ const YourComponent = () => (
 
 ---
 
-### <title> 수정
+## 3. <title> 수정
 
 ```
 // 경로
@@ -76,7 +76,7 @@ import Head from 'next/head'
 
 ---
 
-### styled-jsx ( "CSS-in-JS" 라이브러리 )
+## 4. styled-jsx ( "CSS-in-JS" 라이브러리 )
 
 ```
 return (
@@ -96,7 +96,7 @@ return (
 
 ---
 
-### sass
+## 5. sass
 
 ```
 // 설치
@@ -107,7 +107,7 @@ scss파일은 _app.js에서import해야 먹힘.
 
 ---
 
-### Layout 구성 ( /components/layout/layout )
+## 6. Layout 구성 ( /components/layout/layout )
 
 ```
 // 생성
@@ -129,7 +129,7 @@ import Layout from '../../components/layout'
 </Layout>
 ```
 
-### classnames 라이브러리 ( className 경우에 따라 변경 )
+## 7. classnames 라이브러리 ( className 경우에 따라 변경 )
 
 ```
 // 설치
@@ -150,13 +150,13 @@ return (
 )
 ```
 
-### getStaticProps (SSR 핵심)
+## 8. getStaticProps (SSR 핵심)
 
 참고 : https://nextjs.org/docs/basic-features/data-fetching#getstaticprops-static-generation
 
 - 이 안에서 axios등으로 미리 호출하면 빌드전에 데이터 호출 가능하다.
 
-### 동적경로 (파일이름에 따른 경로 생성)
+## 9. 동적경로 (파일이름에 따른 경로 생성)
 
 1. 폴더 내의 모든 filename을 가져옴 ( /lib/posts => postsDirectory )
 2. 파일의 확장자명을 빼고, 경로로 사용할 이름을 배열에 저장 ( /lib/posts => getAllPostIds )
@@ -169,7 +169,7 @@ return (
 
 그 외 동적경로 세부정보 확인 : https://nextjs.org/learn/basics/dynamic-routes/dynamic-routes-details
 
-### remark 라이브러리 (렌더 마크다운, 파일내부 컨텐츠 화면에 출력)
+## 10. remark 라이브러리 (렌더 마크다운, 파일내부 컨텐츠 화면에 출력)
 
 ```
 npm install remark remark-html
@@ -177,7 +177,7 @@ npm install remark remark-html
 
 getPostData, getStaticProps, Post 업데이트
 
-### 날짜형식지정
+## 11. 날짜형식지정
 
 ```
 // 설치
@@ -193,11 +193,11 @@ export default function Date({ dateString }) {
 <Date dateString={date} />
 ```
 
-### error 404 page 생성
+## 12. error 404 page 생성
 
 pages/404/js
 
-### API 요청
+## 13. API 요청
 
 [1] 경로 생성
 /pages/api/hello.js 확인
@@ -215,7 +215,7 @@ import fetch from ‘node-fetch’;
 
 참고 : https://pks2974.medium.com/nextjs-%EB%A1%9C-static-site-%EB%A7%8C%EB%93%A4%EA%B8%B0-f9ab83f29e7
 
-### 배포
+## 14. 배포
 
 [1] git repository 배포
 
@@ -241,6 +241,6 @@ package.json
 3. build폴더 호스팅 폴더에 넣기
 ```
 
-### 타입스크립트로 변경
+## 15. 타입스크립트로 변경
 
 참고 : https://nextjs.org/learn/excel/typescript/create-tsconfig
